@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Preferences</title>
+</head>
+<body>
+    <form id="recommendations">
+        <label for="placetype">Place Type:</label>
+        <input type="text" name="placetype" id="placetype"><br>
+        <label for="Latitude">Latitude:</label>
+        <input type="text" name="Latitude" id="Latitude"><br>
+        <label for="Latitude">Longitude:</label>
+        <input type="text" name="Longitude" id="Longitude"><br>
+        <label for="Distance">Distance</label>
+        <input type="text" name="Distance" id="Distance"><br>
+        <label for="Budget">Budget:</label>
+        <input type="text" name="Budget" id="Budget"><br>
+        <input type="submit" value="submit">
+    </form>
+    <div id="recommended-place"></div>
+    <script>
+        document.getElementById("recommendations").addEventListener('submit',function(event){
+            event.preventDefault();
+            var placetype=document.getElementById("placetype").value;
+            var Latitude=document.getElementById("Latitude").value;
+            var Longitude=document.getElementById("Longitude").value;
+            var Distance=document.getElementById("Distance").value;
+            var Budget=document.getElementById("Budget").value;
+            fetch('/api/reccomendations',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'applications/json'
+                },body:JSON.stringify({
+                    placetype:placetype,
+                    Latitude:Latitude,
+                    Longitude:Longitude,
+                    Distance:Distance,
+                    Budget:Budget
+                })
+            })
+            .then(response => response.json())
+    .then(async data => {
+        const JSONresponse=await fetch('/api/reccomendations').then(response=>response.json());
+        const RecommendPlaceStorage=document.querySelector('#recommend-places');
+        const RecommendPlaceElement=document.createElement('div');
+        RecommendPlaceElement.classList.add('recommended-place');
+        for(const recomendedplace of JSONresponse.results){
+            const placeID=recomendepdlace.place_id;
+            const placeDetails=recomendedplace.place_details(contect,placeId);
+            const place=new Place(placeDetails.name,placeDetails.rating,placedetails.formattedPhoneNumber,placeDetails.vicinity);
+            RecommendPlaceElement.textContent=place.name;
+            RecommendPlaceStorage.appendChild(RecommendPlaceElement);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+        });
+    </script>
+    
+</body>
+</html>

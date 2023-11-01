@@ -1,0 +1,16 @@
+<%@page language"java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"@>
+<!DOCTYPE html>
+<html>
+    <head>
+        <Title>Search Results for Hotels</Title>
+    </head>
+    <body>
+        <h1>Search Results for Hotels</h1>
+        <ul>
+            <c:forEach var="hotel" items="${hotels}">
+                <li>${hotel.name} - ${hotel.location}</li>
+                
+            </c:forEach>
+        </ul>
+    </body>
+</html>

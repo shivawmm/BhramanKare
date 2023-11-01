@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hotel Search</title>
+    </head>
+    <body>
+        <h1>Hotel Search</h1>
+        <form action="hotel_search" method="Post">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" required><br>
+            <label for="budget">Budget</label>
+            <select id="budget" name="budget">
+            <option value="under_1000">Under INR 1000</option>
+            <option value="1000_to_4000">INR 1000-4000</option>
+            <option value="4000_to_7000">INR 4000-10000</option>
+            <option value="More_than_10000">More Than INR 10000</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </body>
+</html>

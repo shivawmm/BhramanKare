@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Live Directions</title>
+    <style>
+        #map{
+            height:400px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Where you want to go</h1>
+    <div>
+    <form action="/route-result" method="post">
+        <label for="start">Starting Point</label>
+        <input type="text" name="start" id="start"><br>
+        <label for="end">Final Destination</label>
+        <input type="text" name="end" id="end"><br>
+        <input type="submit" value="Search" onclick="findRoute();return false;">
+    </form>
+    </div>
+    <div id="live_map"></div>
+    <script>
+        function initlive_map(){
+            live_map=new google.maps.Map(document.getElementById('map')),{
+                center:{lat:0,lng:0},
+                }
+        }
+        function findRoute(){
+             const start=document.getElementById("start");
+             const end=document.getElementById("end");
+             const dir_service=new google.maps.DirectionsService();
+             const display=new google.maps.DirectionsRenderer({map: live_map,});
+             dir_service.route({
+                origin:start.value,
+                destination:end.value,
+                travelMode:'Driving',
+            },
+             (response,status)=>{
+                if(status === 'OK'){
+                    display.setDirections(response);
+                    live_map.setCenter(response.routes[0].legs[0].start_location);
+                    live_map.setZoom(14);
+                }else{
+                    window.alert("Failed to get the Directions due to "+status);
+                }
+             }
+             );
+        }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initlive_map">
+</script>
+</body>
+</html>

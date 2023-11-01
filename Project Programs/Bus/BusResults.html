@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buses Available</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Bus Name</th>
+                <th>Fare</th>
+                <th>Arrival Time</th>
+                <th>Departure Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${busesavailable}" var="bus">
+                <tr>
+                    <td>${bus.getName()}</td>
+                    <td>${bus.getFare()}</td>
+                    <td>${bus.getArrivalTime()}</td>
+                    <td>${bus.getDepartureTime()}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
+    
+</body>
+</html>

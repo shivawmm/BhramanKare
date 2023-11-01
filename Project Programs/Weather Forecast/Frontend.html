@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <form id="weather-form">
+    <label for="location">Location</label><br>
+    <input type="text" name="location" id="location">
+    <input type="submit" value="GenerateReport">  
+    </form>
+    <div id="weather-report"></div>
+    <script>
+        document.getElementById("weather-form").addEventListener("submit",function(event){
+            event.preventDefault();
+            generate_report();
+        });
+        function generate_report(){
+            var location=document.getElementById("location").value;
+            if(location===""){
+                console.log("Please Enter a Location it seems you have missed to enter a location");
+            }
+            var x=new XMLHttpRequest();
+            x.open("POST","/weather",true);
+            x.setREquestHeader("Content-Type","application/x-www-form-urlencoded");
+            x.onreadystatechange=function(){
+                if(x.status===200){
+                    var resp=JSON.parse(x.reponseText);
+                    document.getElementById("weather-report").innerHTML=`
+                    <h2>Here is the Generated Weather report of ${location}</h2> 
+                    <p>Temperature is ${resp.current_weather.temperature}</p>
+                    <p>Description is ${resp.current_weather.desciption}</p> 
+                    ` ;
+                }
+                else{
+                    alert("An unknown Error Encountered");
+                }
+            };
+                x.send("location"+location);
+            }
+            
+    </script>
+</body>
+</html>
