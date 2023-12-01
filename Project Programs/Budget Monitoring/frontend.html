@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Budget Monitoring</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Track Your Expenses</h1>
+    <table id="ExpenseTable">
+        <tr>
+            <th>Expense Cause</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Amount</th>
+        </tr>
+        <tr>
+            <td><input type="text" id="ExpenseCause" name="ExpenseCause"></td>
+            <td><input type="text" id="ExpenseDate" name="ExpenseDate"></td>
+            <td><input type="text" id="ExpenseTime" name="ExpenseTime"></td>
+            <td><input type="text" id="ExpenseAmount" name="ExpenseAmount"></td>
+        </tr>
+    </table>
+    <button id="CalculateExpenseButton">Calculate Total Expenditure</button>
+    <script src="backend.js"></script>
+</body>
+</html>
